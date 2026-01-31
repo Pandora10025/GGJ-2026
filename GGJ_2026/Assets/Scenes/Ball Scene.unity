@@ -151,9 +151,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3187bfd0e572daf4aba2e9a3a8c16f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 0}
+  npc: {fileID: 8912401177512566782, guid: 4641709ea77d5c9469509952daa20129, type: 3}
   numOfNPCs: 0
   partyEnergy: 0
+  attendeeDistribution:
+  - 0.11
+  - 0.2
+  - 0.3
+  - 0.4
+  xBound: 0
+  yBound: 0
 --- !u!4 &1165658589
 Transform:
   m_ObjectHideFlags: 0
