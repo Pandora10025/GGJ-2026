@@ -3,21 +3,45 @@ using UnityEngine.UI;
 
 public class MaskRenderer : MonoBehaviour
 {
-    public Image shapeImage;
-    public Image patternImage;
-    public Image trimImage;
+    [Header("Library")]
+    public MaskAssetLibrary library;
+
+    [Header("Layers")]
+    public Image baseShape;
+    public Image surfaceDetail;   
+    public Image trim;            
 
     public void Apply(MaskState state)
     {
-        shapeImage.sprite = state.shapeSprite;
-        shapeImage.color = state.baseColor;
+        Debug.Log($"[MaskRenderer] Apply() got baseColor={state.baseColor} shapeId={state.shapeId}");
+        if (state == null) return;
 
-        patternImage.sprite = state.patternSprite;
-        patternImage.color = state.patternColor;
-        patternImage.enabled = state.patternSprite != null;
+        // --- Base Shape ---
+        if (baseShape != null)
+        {
+            Sprite shapeSprite = library != null ? library.GetShape(state.shapeId) : null;
+            baseShape.sprite = shapeSprite;
+            baseShape.color = state.baseColor;
 
-        trimImage.sprite = state.trimSprite;
-        trimImage.color = state.trimColor;
-        trimImage.enabled = state.trimSprite != null;
+            baseShape.enabled = true;
+        }
+
+        // --- Pattern / Surface Detail ---
+        if (surfaceDetail != null)
+        {
+            Sprite patternSprite = library != null ? library.GetPattern(state.patternId) : null;
+            surfaceDetail.sprite = patternSprite;
+            surfaceDetail.color = state.patternColor;
+            surfaceDetail.enabled = patternSprite != null;
+        }
+
+        // --- Trim ---
+        if (trim != null)
+        {
+            Sprite trimSprite = library != null ? library.GetTrim(state.trimId) : null;
+            trim.sprite = trimSprite;
+            trim.color = state.trimColor;
+            trim.enabled = trimSprite != null;
+        }
     }
 }
