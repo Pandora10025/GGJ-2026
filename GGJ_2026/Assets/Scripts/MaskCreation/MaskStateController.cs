@@ -27,7 +27,6 @@ public class MaskStateController : MonoBehaviour
         renderer.Apply(currentMask);
     }
 
-
     // ===== Shape =====
     public void SetShape(string shapeId)
     {

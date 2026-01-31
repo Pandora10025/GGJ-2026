@@ -76,3 +76,4 @@ public class ConfirmMaskPrompt : MonoBehaviour
 
     public bool IsOpen() => _isOpen;
 }
+    
