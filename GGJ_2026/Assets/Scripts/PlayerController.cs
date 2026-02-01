@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.name == "Stair Steps")
+        if(collision.transform.CompareTag("NPC"))
         {
             onStairs = true;
         }
