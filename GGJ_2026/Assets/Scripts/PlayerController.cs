@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float xSpeed = 5f, ySpeed = 5f;
 
-    [SerializeField] public static float balconyLevel = 3f;
-    [SerializeField] public static float scaleLevel = 0.25f;
+    [SerializeField] public static float balconyLevel = 3.5f;
+    [SerializeField] public static float scaleLevel = 0.125f;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,13 +64,13 @@ public class PlayerController : MonoBehaviour
         Vector3 scale;
         if (yLevel > balconyLevel)
         {
-            scale = new Vector3(1f, 1f, 1f);
+            scale = new Vector3(1f, 2f, 1f);
 
         }
         else
         {
             float _s = 1 + (scaleLevel * Mathf.Abs(yLevel - balconyLevel));
-            scale = new Vector3(_s, _s, _s);
+            scale = new Vector3(_s, 2*_s, _s);
         }
 
         return scale;
