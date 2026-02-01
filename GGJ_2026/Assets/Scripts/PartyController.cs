@@ -1,9 +1,9 @@
+using Fungus;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +17,7 @@ public class PartyController : MonoBehaviour
         Fae,
         Siren
     };
+    bool b = false;
 
     [SerializeField] GameObject npc;
     int[] numOfNPCs = { 20, 28, 35 };
@@ -33,7 +34,9 @@ public class PartyController : MonoBehaviour
 
     
     [SerializeField] float posXBound = 9.5f, negXBound = -9.0f;
-    float[] yLevels = { 3.7f, -2f, -4.5f, -7f};
+    float[] yLevels = { 4.2f, -2f, -4.5f, -7f};
+    //
+    float[] zLevels = { 1, -4, -5, -6, -7};
     Vector3[,] possiblePositions = new Vector3[4, 9];//2d array
     int[] spotsPerY = new int[4];
     int totalSpots = -1;
@@ -46,11 +49,15 @@ public class PartyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InitializePossibleGuestLocations();
         DontDestroyOnLoad(this);
+        InitializePossibleGuestLocations();
+        RandomizeGuests();
+        OrganizeSpecies();
+        GuestPlacement();
+        
         
     }
-    #region depression
+    
     void InitializePossibleGuestLocations()
     {
         //set depth here, and set anti swag here
@@ -123,10 +130,7 @@ public class PartyController : MonoBehaviour
             _speciesLeft.Add(_speciesPopulator[rand]);
             _speciesPopulator.RemoveAt(rand);
         }
-        /*for (int i = 0; i < 4; i++)
-        {
-            Debug.Log(speciesNames[_speciesLeft[i]]);
-        }*/
+        
 
 
         //for now, random
@@ -193,55 +197,30 @@ public class PartyController : MonoBehaviour
     /// </summary>
     void GuestPlacement()
     {
-        int[] _speciesFrequency = OrganizeSpecies();
+
+        int numOfGroupsLeft = 0;
+        int spgl_ticker = 7;
 
         //2d array that holds species, no. of members per group, no. of groups
         //{species, perGroup, numGroups}
         //{species, remainder, 1}
         int[,] speciesGroups = new int[3, 8];
-        string s = "";
-        for(int i = 0; i < speciesGroups.GetLength(1); i+=2)
-        {
-            Debug.Log(i);
-            int div = (attendeeDistribution[i/2] > 5 ? 3 : 2);
-            speciesGroups[0, i] = _speciesFrequency[i/2];
-            speciesGroups[1, i] = div;
-            speciesGroups[2, i] = attendeeDistribution[i/2] / div;
-
-            //remainder
-            speciesGroups[0, i+1] = _speciesFrequency[i/2];
-            speciesGroups[1, i+1] = attendeeDistribution[i/2] % div;
-            speciesGroups[2, i+1] = 1;
-
-            s += "[";
-            s += speciesGroups[0, i] + ", ";
-            s += speciesGroups[1, i] + ", ";
-            s += speciesGroups[2, i] + "]\n";
-
-            //remainder
-            s += "[";
-            s += speciesGroups[0, (i + 1)] + ", ";
-            s += speciesGroups[1, i + 1] + ", ";
-            s += speciesGroups[2, i + 1] + "]\n";
-
-        }
-
-        Debug.Log(s);
+        numOfGroupsLeft = InitializeSpeciesGroups(speciesGroups, numOfGroupsLeft);
         
 
 
+        UnityEngine.Random.InitState(System.DateTime.Now.Second + (int)System.DateTime.Now.Ticks);
         List<int> spotsTaken = new List<int>();
-        int guestsLeftToPlace = numOfNPCs[day];
-        while(guestsLeftToPlace > 0)//per each day
+        while(numOfGroupsLeft > 0)//per each day
         {
-            int spot_to_check = UnityEngine.Random.Range(0, guestsLeftToPlace);
+            int spot_to_check = UnityEngine.Random.Range(0, totalSpots);
             //draw number
 
             //check empty
-            while (spotsTaken.Contains(spot_to_check)){
-                spot_to_check = UnityEngine.Random.Range(0, guestsLeftToPlace);
+            if (spotsTaken.Contains(spot_to_check)){
+                spot_to_check = UnityEngine.Random.Range(0, totalSpots);
             }
-
+            //Break;
             //check adjacency
             int _temp = -1;
             for (int y = 0; y < possiblePositions.GetLength(0); y++)
@@ -253,32 +232,110 @@ public class PartyController : MonoBehaviour
                     {
                         if (guestLocations.Contains(new Vector2Int(x+1, y)) || guestLocations.Contains(new Vector2Int(x - 1, y)))
                         {//there's one adjacent
-                            guestsLeftToPlace++;//fail condition, no guest placed
+                            //fail condition, no guest placed
+                        }
+                        else
+                        {//place guest!
+                            Vector3Int specAndNum = FindNextGroup(speciesGroups, spgl_ticker);
+                            spgl_ticker = specAndNum.z;
+                            createNPC(specAndNum.x, possiblePositions[y, x], specAndNum.y);
+                            //subtract group from all groups
+                            guestLocations.Add(new Vector2Int(x, y));
+                            spotsTaken.Add(spot_to_check);
+                            numOfGroupsLeft--;//success, guest placed
                         }
                     }
-                    else
-                    {//place guest!
-
-                    }
                     
-
                 }
             }
-            guestsLeftToPlace--;
+            if (numOfGroupsLeft == 0) break;
+        }
+    }
+    /// <summary>
+    /// Initialize Species Groups the 2d array that contains {species, perGroup, numGroups}
+    /// </summary>
+    /// <param name="speciesGroups"></param>
+    /// <param name="numOfGroupsLeft"></param>
+    /// <returns></returns>
+    private int InitializeSpeciesGroups(int[,] speciesGroups, int numOfGroupsLeft)
+    {
+
+        int[] _speciesFrequency = OrganizeSpecies();
+        string s = "";
+        for (int i = 0; i < speciesGroups.GetLength(1); i += 2)
+        {
+            Debug.Log(i);
+            int div = (attendeeDistribution[i / 2] > 5 ? 3 : 2);
+            speciesGroups[0, i] = _speciesFrequency[i / 2];
+            speciesGroups[1, i] = div;
+            speciesGroups[2, i] = attendeeDistribution[i / 2] / div;
+            numOfGroupsLeft += attendeeDistribution[i / 2] / div;
+
+            //remainder
+            speciesGroups[0, i + 1] = _speciesFrequency[i / 2];
+            speciesGroups[1, i + 1] = attendeeDistribution[i / 2] % div;
+            if (speciesGroups[1, i + 1] > 0)
+            {
+                speciesGroups[2, i + 1] = 1;
+                numOfGroupsLeft += 1;
+            }
+            else
+            {
+                speciesGroups[2, i + 1] = 0;
+            }
+
+
+            s += "[";
+            s += speciesGroups[0, i] + ", ";
+            s += speciesGroups[1, i] + ", ";
+            s += speciesGroups[2, i] + "]\n";
+
+            //remainder
+            s += "[";
+            s += speciesGroups[0, (i + 1)] + ", ";
+            s += speciesGroups[1, i + 1] + ", ";
+            s += speciesGroups[2, i + 1] + "]\n";
+            
+
         }
 
-        
-
+        Debug.Log(s);
+        Debug.Log("initialized, this many groups left: " + numOfGroupsLeft);
+        return numOfGroupsLeft;
     }
 
-    Vector3 FindNextSpot()
+    /// <summary>
+    /// Find the next available Group to remove
+    /// </summary>
+    /// <param name="_speciesGroups"></param>
+    /// <returns>Returns species of the group and number of people in it</returns>
+    private Vector3Int FindNextGroup(int[,] _speciesGroups, int _ticker)
     {
-        Vector3 v3 = Vector3.zero;
+        //2d array that holds species, no. of members per group, no. of groups
+        //{species, perGroup, numGroups}
+        Vector3Int ret = new Vector3Int();
 
+        while(_speciesGroups[2, _ticker] == 0)
+        {
+            _ticker--;
+            if(_ticker == -1)
+            {
+                break;
+            }
+        }
+        Debug.Log(_ticker);
+        ret.x = _speciesGroups[0, _ticker];
+        
+        ret.y = _speciesGroups[1, _ticker];
 
+        _speciesGroups[2, _ticker]--;
 
-        return v3;
+        ret.z = _ticker;
+        //Debug.Log("Species SHOULD be: "+ speciesNames[ret.x] + " with " + ret.y);
+        
+        return ret;
     }
+    
 
     /// <summary>
     /// helper function for GuestPlacement that organizes the species in frequency order
@@ -328,15 +385,23 @@ public class PartyController : MonoBehaviour
     /// <param name="_position"></param>
     void createNPC(int _species, Vector3 _position, int _numInGroup)
     {
-        GameObject temp = Instantiate(npc, _position, Quaternion.identity);
-        temp.GetComponent<NPCBrain>().species = _species;
-        temp.GetComponent<NPCBrain>().groupNum = _numInGroup;
+        Debug.Log("Creating " + speciesNames[_species] + " " + _numInGroup);
+        float zed = 0.0f;
+        for (int i = 0; i < yLevels.Length; i++) {
+            if (_position.y == yLevels[i])
+            {
+                zed = zLevels[i];
+            }
+        }
+        GameObject temp = Instantiate(npc, new Vector3(_position.x, _position.y, zed), Quaternion.identity);
+        //setting OTHER is not working
+        temp.GetComponent<NPCBrain>().SetSpeciesAndGroupNum(_species, _numInGroup-1);
        //PlayerController.CalculateScale
 
         guestObjects.Add(temp);
 
     }
-    #endregion depression
+    
     // Update is called once per frame
 
     
@@ -344,20 +409,18 @@ public class PartyController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RandomizeGuests();
-            OrganizeSpecies();
-            GuestPlacement();
+            
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            //createNPC(2, new Vector3(0, 0, 0), 3);
+            
         }
 
         if(partyEnergy >= 70)
         {
             day++;
-            SceneManager.LoadScene("");
+            SceneManager.LoadScene("Carmila VN");
         }
     }
 }
