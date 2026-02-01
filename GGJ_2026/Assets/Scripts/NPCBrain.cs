@@ -15,11 +15,14 @@ public class NPCBrain : MonoBehaviour
     GameObject npc;
     public int species = -1;
     Sprite spr;
+    Vector3 startingScale;
+
     
 
     private void Awake()
     {
-        this.GetComponent<Transform>().localScale = PlayerController.CalculateScale(this.GetComponent<Transform>().position.y);
+        startingScale = transform.localScale;
+        this.GetComponent<Transform>().localScale = PlayerController.CalculateScale(this.GetComponent<Transform>().position.y, startingScale);
         switch (species)
         {
             case (int) Species.Vampire:

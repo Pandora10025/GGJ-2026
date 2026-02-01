@@ -22,7 +22,7 @@ public class PartyController : MonoBehaviour
     [Tooltip("vamp, were, fae, siren")]
     int[] attendeeDistribution = { 10, 20, 30, 40 };//should always add up to 1
     String[] speciesNames = { "Vampire", "Werewolf", "Fae", "Siren" };
-    List<Vector2> guestLocations = new List<Vector2>();
+    List<Vector2Int>guestLocations = new List<Vector2Int>();
     Vector3 empty = new Vector3(-1, -1, -1);
 
     [SerializeField] public static int partyType;
@@ -33,7 +33,10 @@ public class PartyController : MonoBehaviour
     float[] yLevels = { 3.7f, -2f, -4.5f, -7f};
     Vector3[,] possiblePositions = new Vector3[4, 9];//2d array
     int[] spotsPerY = new int[4];
+    int totalSpots = -1;
     public static List<GameObject> guestObjects = new List<GameObject>();
+
+    //TODO: dump all arrays of game objects when switching scenes
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +94,7 @@ public class PartyController : MonoBehaviour
                 float currX = negXBound + ((x * (xDist / (spotsPerY[y] - 1))));
                 float currY = yLevels[y];
                 possiblePositions[y, x] = new Vector3(currX, currY);
+                totalSpots++;
                 
             }
         }
@@ -185,43 +189,91 @@ public class PartyController : MonoBehaviour
     void GuestPlacement()
     {
         int[] _speciesFrequency = OrganizeSpecies();
+
+        //2d array that holds species, no. of members per group, no. of groups
+        //{species, perGroup, numGroups}
+        //{species, remainder, 1}
+        int[,] speciesGroups = new int[3, 8];
+        string s = "";
+        for(int i = 0; i < speciesGroups.GetLength(1); i+=2)
+        {
+            Debug.Log(i);
+            int div = (attendeeDistribution[i/2] > 5 ? 3 : 2);
+            speciesGroups[0, i] = _speciesFrequency[i/2];
+            speciesGroups[1, i] = div;
+            speciesGroups[2, i] = attendeeDistribution[i/2] / div;
+
+            //remainder
+            speciesGroups[0, i+1] = _speciesFrequency[i/2];
+            speciesGroups[1, i+1] = attendeeDistribution[i/2] % div;
+            speciesGroups[2, i+1] = 1;
+
+            s += "[";
+            s += speciesGroups[0, i] + ", ";
+            s += speciesGroups[1, i] + ", ";
+            s += speciesGroups[2, i] + "]\n";
+
+            //remainder
+            s += "[";
+            s += speciesGroups[0, (i + 1)] + ", ";
+            s += speciesGroups[1, i + 1] + ", ";
+            s += speciesGroups[2, i + 1] + "]\n";
+
+        }
+
+        Debug.Log(s);
         
-        int mostFreqRemainder = _speciesFrequency[3] % 3;
-        int mostFreq = _speciesFrequency[3] / 3;//might have truncation versus rounding issues?
 
-        int secondFreqRemainder = _speciesFrequency[2] % 3;
-        int secondFreq = _speciesFrequency[2] / 3;
 
-        int thirdFreqRemainder = _speciesFrequency[1] % 2;
-        int thirdFreq = _speciesFrequency[1] / 2;
-
-        int lastFreqRemainder = _speciesFrequency[0] % 2;
-        int lastFreq = _speciesFrequency[0] / 2;
-
-        for(int i = 0; i < numOfNPCs[day]; i++)
+        /*List<int> spotsTaken = new List<int>();
+        int guestsLeftToPlace = numOfNPCs[day];
+        while(guestsLeftToPlace > 0)//per each day
         {
+            int spot_to_check = UnityEngine.Random.Range(0, guestsLeftToPlace);
+            //draw number
 
-        }
-
-        for (int y = 0; y < possiblePositions.GetLength(0); y++)
-        {
-            for (int x = 0; x < spotsPerY[y]; x++)
-            {
-                
-
+            //check empty
+            while (spotsTaken.Contains(spot_to_check)){
+                spot_to_check = UnityEngine.Random.Range(0, guestsLeftToPlace);
             }
-        }
+
+            //check adjacency
+            int _temp = -1;
+            for (int y = 0; y < possiblePositions.GetLength(0); y++)
+            {
+                for (int x = 0; x < spotsPerY[y]; x++)//x, y
+                {
+                    _temp++;
+                    if (_temp == spot_to_check)
+                    {
+                        if (guestLocations.Contains(new Vector2Int(x+1, y)) || guestLocations.Contains(new Vector2Int(x - 1, y)))
+                        {//there's one adjacent
+                            guestsLeftToPlace++;//fail condition, no guest placed
+                        }
+                    }
+                    else
+                    {//place guest!
+
+                    }
+                    
+
+                }
+            }
+            guestsLeftToPlace--;
+        }*/
+
+        
 
     }
 
-    Vector3 FindNextSpot()
+    /*Vector3 FindNextSpot()
     {
         Vector3 v3;
 
 
 
         return v3;
-    }
+    }*/
 
     /// <summary>
     /// helper function for GuestPlacement that organizes the species in frequency order
