@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de185d030bae42b4b96257164e08a2ac, type: 3}
+  m_Name: MaskShapeCatalog2D
+  m_EditorClassIdentifier: 
+  shapePrefabs:
+  - {fileID: 8943582057280037623, guid: 4d290ca372ffd4356b8481d031a64523, type: 3}
+  - {fileID: 8943582057280037623, guid: 1bea972df7ca947b1a1e4b5ce06e76bd, type: 3}
+  - {fileID: 8943582057280037623, guid: cfb25e3d1906944e0bd7840841085025, type: 3}
+  - {fileID: 8943582057280037623, guid: ee0f768b77d974f08998778b86257466, type: 3}
+  - {fileID: 8943582057280037623, guid: 612d409caeeab473db1484bf8f39f597, type: 3}
