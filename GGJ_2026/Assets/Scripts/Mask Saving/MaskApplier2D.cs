@@ -58,6 +58,7 @@ public class MaskApplier2D : MonoBehaviour
         // 2) Spawn placed items
         MaskItemRegistry.Warm();
 
+        int i = 0;
         foreach (var placed in data.placedItems)
         {
             var itemData = MaskItemRegistry.Get(placed.itemId);
@@ -72,9 +73,13 @@ public class MaskApplier2D : MonoBehaviour
             if (sr != null)
             {
                 sr.color = placed.tint.ToUnity();
-                sr.sortingLayerName = placed.sortingLayer;
-                sr.sortingOrder = placed.orderInLayer;
+
+                // Force ALL items to render above the base, in a consistent stack order
+                sr.sortingLayerName = baseSortingLayer;
+                sr.sortingOrder = baseOrder + 1 + i;
             }
+
+            i++;
         }
     }
 }
