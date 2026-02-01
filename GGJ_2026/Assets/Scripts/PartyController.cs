@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PartyController : MonoBehaviour
 {
-    public int day = 2;
+    static public int day = 0;
     public enum Species
     {
         Vampire,
@@ -17,7 +20,7 @@ public class PartyController : MonoBehaviour
 
     [SerializeField] GameObject npc;
     int[] numOfNPCs = { 20, 28, 35 };
-    [SerializeField] double partyEnergy = 0;
+    [SerializeField] public static int partyEnergy = 0;
     [SerializeField]
     [Tooltip("vamp, were, fae, siren")]
     int[] attendeeDistribution = { 10, 20, 30, 40 };//should always add up to 1
@@ -36,16 +39,18 @@ public class PartyController : MonoBehaviour
     int totalSpots = -1;
     public static List<GameObject> guestObjects = new List<GameObject>();
 
+    String[] sceneNames = {"Carmilla VN", "Nosferatu VN", "Dracula VN" };
     //TODO: dump all arrays of game objects when switching scenes
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        InitializePossibleGuestLocations();
-
+        //InitializePossibleGuestLocations();
+        DontDestroyOnLoad(this);
         
     }
-
+    #region depression
     void InitializePossibleGuestLocations()
     {
         //set depth here, and set anti swag here
@@ -225,7 +230,7 @@ public class PartyController : MonoBehaviour
         
 
 
-        /*List<int> spotsTaken = new List<int>();
+        List<int> spotsTaken = new List<int>();
         int guestsLeftToPlace = numOfNPCs[day];
         while(guestsLeftToPlace > 0)//per each day
         {
@@ -260,20 +265,20 @@ public class PartyController : MonoBehaviour
                 }
             }
             guestsLeftToPlace--;
-        }*/
+        }
 
         
 
     }
 
-    /*Vector3 FindNextSpot()
+    Vector3 FindNextSpot()
     {
-        Vector3 v3;
+        Vector3 v3 = Vector3.zero;
 
 
 
         return v3;
-    }*/
+    }
 
     /// <summary>
     /// helper function for GuestPlacement that organizes the species in frequency order
@@ -321,17 +326,20 @@ public class PartyController : MonoBehaviour
     /// </summary>
     /// <param name="_species"></param>
     /// <param name="_position"></param>
-    void createNPC(int _species, Vector3 _position)
+    void createNPC(int _species, Vector3 _position, int _numInGroup)
     {
         GameObject temp = Instantiate(npc, _position, Quaternion.identity);
         temp.GetComponent<NPCBrain>().species = _species;
+        temp.GetComponent<NPCBrain>().groupNum = _numInGroup;
        //PlayerController.CalculateScale
 
         guestObjects.Add(temp);
 
     }
-
+    #endregion depression
     // Update is called once per frame
+
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -339,6 +347,17 @@ public class PartyController : MonoBehaviour
             RandomizeGuests();
             OrganizeSpecies();
             GuestPlacement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            //createNPC(2, new Vector3(0, 0, 0), 3);
+        }
+
+        if(partyEnergy >= 70)
+        {
+            day++;
+            SceneManager.LoadScene("");
         }
     }
 }

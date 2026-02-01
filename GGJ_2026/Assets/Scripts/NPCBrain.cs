@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NPCBrain : MonoBehaviour
@@ -15,6 +16,7 @@ public class NPCBrain : MonoBehaviour
 
     GameObject npc;
     public int species = -1;
+    public int groupNum = -1;
     Sprite spr;
     Vector3 startingScale;
     [SerializeField] Sprite[] allSprites = new Sprite[12];
@@ -26,6 +28,7 @@ public class NPCBrain : MonoBehaviour
 
     private void Awake()
     {
+        PartyController.partyEnergy = 0;
         canvas = this.GetComponentInChildren<Canvas>();
         
         startingScale = transform.localScale;
@@ -33,23 +36,17 @@ public class NPCBrain : MonoBehaviour
         //canvPos = canvas.GetComponent<RectTransform>().localScale * startingScale.x;
         this.GetComponent<Transform>().localScale = PlayerController.CalculateScale(this.GetComponent<Transform>().position.y, startingScale);
         canvas.GetComponent<RectTransform>().localScale = canvScale;
-        switch (species)
+        //flip a coin
+        if (UnityEngine.Random.Range(0, 1) == 1)
         {
-            case (int) Species.Vampire:
-                this.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
-                break;
-            case (int) Species.Werewolf:
-                this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
-                break;
-            case (int)Species.Fae:
-                this.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0);
-                break;
-            case (int) Species.Siren:
-                this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 255);
-                break;
-            default:
-                break;
+            this.GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        //Debug.Log((species * 3) + (groupNum - 1));
+        
+        
+        this.GetComponent<SpriteRenderer>().sprite = allSprites[UnityEngine.Random.Range(0, 2)];
+        
         showDialogue = false;
     }
     void Update()
@@ -62,14 +59,20 @@ public class NPCBrain : MonoBehaviour
         {
             canvas.enabled = true;
         }
+
+        
         //dialogue pops up while nearby
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.name == "Player")
         {
-            showDialogue = true;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Talk();
+                showDialogue = true;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -78,6 +81,55 @@ public class NPCBrain : MonoBehaviour
         {
             showDialogue = false;
         }
+    }
+
+    public void ShowDialogue(bool _showDialogue)
+    {
+        showDialogue = _showDialogue;
+    }
+
+    public void Talk()
+    {
+        int like = -1;
+        float rand = UnityEngine.Random.Range(0.0f, 10.0f);
+        if(rand > 2.5)
+        {
+            like = UnityEngine.Random.Range(4, 2);
+        }
+        else
+        {
+            like = UnityEngine.Random.Range(0, 1);
+        }
+        string s = "";
+        switch (like)
+        {
+            case 4:
+                s = "Divine.Such refined elegance.";
+                break;
+            case 3:
+                s = "How delightfully dramatic.";
+                break;
+            case 2:
+                s = "Mm.Passible.";
+                break;
+            case 1:
+                s = "A bit gauche.";
+                break;
+            case 0:
+                s = "I wouldn't be caught dead wearing that…";
+                break;
+            default:
+                s = "Hmph.";
+                break;
+        }
+        PartyController.partyEnergy += like;
+        canvas.GetComponentInChildren<TextMeshProUGUI>().text = s;
+        Debug.Log(PartyController.partyEnergy);
+    }
+
+    public void SetSpeciesAndGroupNum(int species, int groupNum)
+    {
+        //set these
     }
 }
 
