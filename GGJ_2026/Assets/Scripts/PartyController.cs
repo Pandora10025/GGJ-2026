@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public class PartyController : MonoBehaviour
@@ -225,7 +226,7 @@ public class PartyController : MonoBehaviour
         
 
 
-        /*List<int> spotsTaken = new List<int>();
+        List<int> spotsTaken = new List<int>();
         int guestsLeftToPlace = numOfNPCs[day];
         while(guestsLeftToPlace > 0)//per each day
         {
@@ -260,20 +261,20 @@ public class PartyController : MonoBehaviour
                 }
             }
             guestsLeftToPlace--;
-        }*/
+        }
 
         
 
     }
 
-    /*Vector3 FindNextSpot()
+    Vector3 FindNextSpot()
     {
-        Vector3 v3;
+        Vector3 v3 = Vector3.zero;
 
 
 
         return v3;
-    }*/
+    }
 
     /// <summary>
     /// helper function for GuestPlacement that organizes the species in frequency order
@@ -321,10 +322,11 @@ public class PartyController : MonoBehaviour
     /// </summary>
     /// <param name="_species"></param>
     /// <param name="_position"></param>
-    void createNPC(int _species, Vector3 _position)
+    void createNPC(int _species, Vector3 _position, int _numInGroup)
     {
         GameObject temp = Instantiate(npc, _position, Quaternion.identity);
         temp.GetComponent<NPCBrain>().species = _species;
+        temp.GetComponent<NPCBrain>().groupNum = _numInGroup;
        //PlayerController.CalculateScale
 
         guestObjects.Add(temp);
@@ -339,6 +341,11 @@ public class PartyController : MonoBehaviour
             RandomizeGuests();
             OrganizeSpecies();
             GuestPlacement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            createNPC(2, new Vector3(0, 0, 0), 3);
         }
     }
 }

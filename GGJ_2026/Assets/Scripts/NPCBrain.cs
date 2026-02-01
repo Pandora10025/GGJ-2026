@@ -15,6 +15,7 @@ public class NPCBrain : MonoBehaviour
 
     GameObject npc;
     public int species = -1;
+    public int groupNum = -1;
     Sprite spr;
     Vector3 startingScale;
     [SerializeField] Sprite[] allSprites = new Sprite[12];
@@ -33,23 +34,17 @@ public class NPCBrain : MonoBehaviour
         //canvPos = canvas.GetComponent<RectTransform>().localScale * startingScale.x;
         this.GetComponent<Transform>().localScale = PlayerController.CalculateScale(this.GetComponent<Transform>().position.y, startingScale);
         canvas.GetComponent<RectTransform>().localScale = canvScale;
-        switch (species)
+        //flip a coin
+        if (UnityEngine.Random.Range(0, 1) == 1)
         {
-            case (int) Species.Vampire:
-                this.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
-                break;
-            case (int) Species.Werewolf:
-                this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
-                break;
-            case (int)Species.Fae:
-                this.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0);
-                break;
-            case (int) Species.Siren:
-                this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 255);
-                break;
-            default:
-                break;
+            this.GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        //Debug.Log((species * 3) + (groupNum - 1));
+        
+        
+        this.GetComponent<SpriteRenderer>().sprite = allSprites[UnityEngine.Random.Range(0, 2)];
+        
         showDialogue = false;
     }
     void Update()
@@ -78,6 +73,11 @@ public class NPCBrain : MonoBehaviour
         {
             showDialogue = false;
         }
+    }
+
+    public void SetSpeciesAndGroupNum(int species, int groupNum)
+    {
+
     }
 }
 

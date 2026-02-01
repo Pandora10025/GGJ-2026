@@ -67,13 +67,7 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.transform.CompareTag("NPC"))
-        {
-            onStairs = true;
-        }
-    }
+   
 
     /// <summary>
     /// Function that takes in the y-level of a Game Object, specifically the Player and NPCs

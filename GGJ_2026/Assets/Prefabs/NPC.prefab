@@ -412,19 +412,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   species: 0
+  groupNum: -1
   allSprites:
   - {fileID: 21300000, guid: ce5553d8a46021c49a202a0ea10b15e2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 4423aec6eb2c4504f9acd051c52792cd, type: 3}
+  - {fileID: 21300000, guid: 0e11346da8001734a83dcd6e2d484ebc, type: 3}
   - {fileID: 21300000, guid: 308b1ae9ab2b6e04684f04ed7c03f6a6, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: c4dc25906ab897a4585c9e330ed3357d, type: 3}
+  - {fileID: 21300000, guid: d9194d8a70956a346af42f2e55c3ac2f, type: 3}
   - {fileID: 21300000, guid: e8ef50849862244458dd8ce71a065f4c, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 4abefcc1f04af2342acb9991d13e2a38, type: 3}
+  - {fileID: 21300000, guid: 2a35f904ce243cd479c1da4f28ded4ff, type: 3}
   - {fileID: 21300000, guid: 31f9bbf2438337c45ae5428ab981a1de, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: e057b951093c02a458050832096253ab, type: 3}
+  - {fileID: 21300000, guid: 6cff42c5cd2b359458ca631d25006b50, type: 3}
 --- !u!58 &2543635824104636698
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -459,4 +460,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1
