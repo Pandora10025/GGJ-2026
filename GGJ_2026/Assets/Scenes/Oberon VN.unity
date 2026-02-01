@@ -800,7 +800,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 6
-    y: 63
+    y: 64
     width: 60
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -850,8 +850,10 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 1132948497}
+  selectedCommands:
+  - {fileID: 1132948500}
   variables: []
   description: 
   stepPause: 0
@@ -2081,7 +2083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: Oberon
-  nameColor: {r: 1, g: 1, b: 1, a: 1}
+  nameColor: {r: 1, g: 0.29803923, b: 0.6627451, a: 1}
   soundEffect: {fileID: 0}
   portraits: []
   portraitsFace: 0
