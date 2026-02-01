@@ -4,15 +4,48 @@ using UnityEngine;
 
 public class NPCBrain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum Species
     {
-        
-    }
+        Vampire,
+        Werewolf,
+        Fae,
+        Siren
+    };
 
-    // Update is called once per frame
+    GameObject npc;
+    public int species = -1;
+    Sprite spr;
+    Vector3 startingScale;
+
+    
+
+    private void Awake()
+    {
+        startingScale = transform.localScale;
+        this.GetComponent<Transform>().localScale = PlayerController.CalculateScale(this.GetComponent<Transform>().position.y, startingScale);
+        switch (species)
+        {
+            case (int) Species.Vampire:
+                this.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+                break;
+            case (int) Species.Werewolf:
+                this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0);
+                break;
+            case (int)Species.Fae:
+                this.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0);
+                break;
+            case (int) Species.Siren:
+                this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 255);
+                break;
+            default:
+                break;
+        }
+    }
     void Update()
     {
-        
+        //dialogue pops up while nearby
     }
+
+    
 }
+
