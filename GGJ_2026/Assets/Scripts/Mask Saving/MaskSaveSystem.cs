@@ -19,6 +19,8 @@ public static class MaskSaveSystem
 
     public static MaskData LoadOrNull()
     {
+        Debug.Log("[MaskSaveSystem] LoadPath = " + SavePath + " exists=" + File.Exists(SavePath));
+
         if (cached != null) return cached;
         if (!File.Exists(SavePath)) return null;
 
