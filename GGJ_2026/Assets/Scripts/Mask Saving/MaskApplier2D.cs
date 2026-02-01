@@ -23,7 +23,6 @@ public class MaskApplier2D : MonoBehaviour
 
         Debug.Log($"[MaskApplier2D] Loaded shapeIndex={data.shapeIndex}, items={data.placedItems?.Count ?? 0}");
 
-
         var shapeCatalog = Resources.Load<MaskShapeCatalog2D>("MaskShapeCatalog2D");
         if (shapeCatalog == null)
         {
