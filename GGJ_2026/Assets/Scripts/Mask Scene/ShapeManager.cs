@@ -14,6 +14,9 @@ public class ShapeManager : MonoBehaviour
 
     public int CurrentShapeIndex { get; private set; } = -1;
 
+    // Expose this for other systems (like MaskItemPlacer2D)
+    public MaskShapeInstance CurrentShapeInstance => currentShape;
+
     private void Awake()
     {
         if (buildState == null) buildState = GetComponent<MaskBuildState>();
@@ -24,16 +27,15 @@ public class ShapeManager : MonoBehaviour
     {
         if (index < 0 || index >= shapePrefabs.Length) return;
 
-        // If changing shape after already having one, clear applied stuff first
-        if (currentShape != null)
-        {
-            ClearAllApplied();
-        }
+        // Changing shape wipes everything applied
+        if (buildState != null)
+            buildState.ClearAllPlaced();
 
-        // Swap shape
+        // Swap shape (destroying old shape also destroys any children under it)
         if (currentShapeGO != null) Destroy(currentShapeGO);
 
         CurrentShapeIndex = index;
+
         currentShapeGO = Instantiate(shapePrefabs[index], maskPreviewRoot);
         currentShapeGO.transform.localPosition = Vector3.zero;
         currentShapeGO.transform.localRotation = Quaternion.identity;
@@ -45,18 +47,8 @@ public class ShapeManager : MonoBehaviour
             Debug.LogError("Selected shape prefab is missing MaskShapeInstance on its root.");
         }
 
-        buildState.SetHasShape(true);
-    }
-
-    private void ClearAllApplied()
-    {
-        // For now, applied things are assumed to be children under AttachmentRoot
-        var root = currentShape.AttachmentRoot;
-        if (root == null) return;
-
-        for (int i = root.childCount - 1; i >= 0; i--)
-        {
-            Destroy(root.GetChild(i).gameObject);
-        }
+        // This is the authoritative “shape selected” flag (via shapeIndex)
+        if (buildState != null)
+            buildState.SetShapeIndex(index);
     }
 }
