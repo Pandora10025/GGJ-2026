@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static float balconyLevel = 4.3f;
     [SerializeField] public static float scaleLevel = 0.125f;
     [SerializeField] private float[] stairUpperBounds = new float[4];
+    private bool b = false;
     bool onStairs = false;
     
     // Start is called before the first frame update
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
             player.GetComponent<Animator>().SetBool("isWalking", true);
         }
 
+        
         //need to change scale to be closer/further away when not on the balcony or stairs
 
         player.transform.localScale = CalculateScale(player.transform.position.y, startingScale);
@@ -67,7 +69,6 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-   
 
     /// <summary>
     /// Function that takes in the y-level of a Game Object, specifically the Player and NPCs
