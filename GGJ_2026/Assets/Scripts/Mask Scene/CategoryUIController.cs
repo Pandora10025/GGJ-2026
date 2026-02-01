@@ -7,7 +7,8 @@ public enum MaskCategory
     Lace,
     Furs,
     Flowers,
-    Accessories
+    Accessories,
+    Trim
 }
 
 public class CategoryUIController : MonoBehaviour

@@ -13,15 +13,51 @@ MonoBehaviour:
   m_Name: MaskAssetLibrary
   m_EditorClassIdentifier: 
   shapes:
-  - id: shape_round_placeholder
-    sprite: {fileID: 0}
-  - id: shape_angular_placeholder
-    sprite: {fileID: 0}
+  - id: shape_princess
+    sprite: {fileID: 21300000, guid: b54d57df17935dd4490d2b0bd7811c30, type: 3}
+  - id: shape_spectre
+    sprite: {fileID: 21300000, guid: 3fa9c99c2ff7841459f0056366b5c0d3, type: 3}
+  - id: shape_jester
+    sprite: {fileID: 21300000, guid: a4f2b457838eb824695793f912e9f438, type: 3}
+  - id: shape_anime
+    sprite: {fileID: 21300000, guid: 010223ce0dd138c41876cdfffe54c904, type: 3}
+  - id: shape_solid
+    sprite: {fileID: 21300000, guid: d58a67ef539a48f4d82fd357322a5bfe, type: 3}
   patterns: []
-  trims: []
+  trims:
+  - id: princess_trim_1
+    sprite: {fileID: 21300000, guid: 4ccc689519252484688ff1bdb6fd6a73, type: 3}
+  - id: princess_trim_2
+    sprite: {fileID: 21300000, guid: e41c7789ebfe6944cbfbab362295e30e, type: 3}
+  - id: jester_trim_1
+    sprite: {fileID: 21300000, guid: ed09cb2c7fedcb74d8ac92d06589245a, type: 3}
+  - id: jester_trim_2
+    sprite: {fileID: 21300000, guid: 35eca8fab7b8c784fb20f29a58344b77, type: 3}
+  - id: spectre_trim_1
+    sprite: {fileID: 21300000, guid: 2cc4b8d41d6c88a468a7247e16e779d2, type: 3}
+  - id: spectre_trim_2
+    sprite: {fileID: 21300000, guid: 0cf728c5660bcc246ab13c3d7fb4c5af, type: 3}
+  - id: solid_trim_1
+    sprite: {fileID: 21300000, guid: 1df845460fe85ac41ab3b050139de144, type: 3}
+  - id: solid_trim_2
+    sprite: {fileID: 21300000, guid: 75fa322cd62103a48b00f0a34169ebc2, type: 3}
+  - id: anime_trim_1
+    sprite: {fileID: 21300000, guid: a585ef8c0fa97cf4eafacc789bf5357b, type: 3}
+  - id: anime_trim_2
+    sprite: {fileID: 21300000, guid: 1bb4f06057f268c47a9aa6ae2f5271fd, type: 3}
   gilded: []
   lace: []
-  feathers: []
+  feathers:
+  - id: feather_1
+    sprite: {fileID: 21300000, guid: 95300e366c44e774698b18307d02834b, type: 3}
+  - id: feather_2
+    sprite: {fileID: 21300000, guid: 3dba52853ae1bf844b6c19c11ad869fb, type: 3}
+  - id: feather_3
+    sprite: {fileID: 21300000, guid: 18fd2d1d4d91bcf40846df97e8b6e310, type: 3}
+  - id: feather_4
+    sprite: {fileID: 21300000, guid: e2cbb1b4cef17264a909af780453a11b, type: 3}
+  - id: feather_5
+    sprite: {fileID: 21300000, guid: af69ed033fbdcc540b7da2b76d55039d, type: 3}
   furs: []
   accessories: []
   flowers: []
