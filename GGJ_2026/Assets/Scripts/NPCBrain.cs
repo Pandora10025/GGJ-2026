@@ -15,8 +15,8 @@ public class NPCBrain : MonoBehaviour
     };
 
     GameObject npc;
-    public int species = -1;
-    public int groupNum = -1;
+    private int species = 0;
+    private int groupNum = 0;
     Sprite spr;
     Vector3 startingScale;
     [SerializeField] Sprite[] allSprites = new Sprite[12];
@@ -42,11 +42,10 @@ public class NPCBrain : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = true;
         }
 
-        //Debug.Log((species * 3) + (groupNum - 1));
         
-        
-        this.GetComponent<SpriteRenderer>().sprite = allSprites[UnityEngine.Random.Range(0, 2)];
-        
+
+        //this.GetComponent<SpriteRenderer>().sprite = allSprites[UnityEngine.Random.Range(0, 2)];
+
         showDialogue = false;
     }
     void Update()
@@ -127,9 +126,14 @@ public class NPCBrain : MonoBehaviour
         Debug.Log(PartyController.partyEnergy);
     }
 
-    public void SetSpeciesAndGroupNum(int species, int groupNum)
+    public void SetSpeciesAndGroupNum(int _species, int _groupNum)
     {
-        //set these
+        
+        this.species = _species;
+        this.groupNum = _groupNum;
+        Debug.Log(this.species + ", " + this.groupNum);
+        //set sprite section
+        this.GetComponent<SpriteRenderer>().sprite = allSprites[((species * 3) + (groupNum))];
     }
 }
 
