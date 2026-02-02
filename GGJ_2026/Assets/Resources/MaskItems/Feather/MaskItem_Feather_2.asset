@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0945853ea41222e47ac5ec8738716866, type: 3}
+  m_Name: MaskItem_Feather_2
+  m_EditorClassIdentifier: 
+  itemId: feather_2
+  category: 1
+  icon: {fileID: 21300000, guid: 3dba52853ae1bf844b6c19c11ad869fb, type: 3}
+  prefab2D: {fileID: 1451056712754038361, guid: aea0fdc72bec5e54594712871b6fc0ea, type: 3}
+  refinement: 0
+  era: 0
+  ornamentation: 0
+  presence: 0

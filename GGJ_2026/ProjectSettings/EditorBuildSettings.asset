@@ -18,9 +18,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MaskLoadTest.unity
     guid: e8f86c3508f70466388ab008b1559d01
   - enabled: 1
-    path: Assets/Scenes/Claudine VN.unity
+    path: Assets/Scenes/VN Scenes/Claudine VN.unity
     guid: 7ace60b0cc220493bb36feabbcc3a842
   - enabled: 1
     path: Assets/Scenes/Ball Scene.unity
     guid: fd1349800c699914296923028d37ad55
+  - enabled: 1
+    path: Assets/Scenes/VN Scenes/Carmilla VN.unity
+    guid: 71041fbdff73349b9ad9396560c23aa3
+  - enabled: 1
+    path: Assets/Scenes/VN Scenes/Dracula VN.unity
+    guid: 1b278d367baadac4e988b6e6ab11ae05
+  - enabled: 1
+    path: Assets/Scenes/VN Scenes/Nosferatu VN.unity
+    guid: f69a07616c10d4a48832d9e5865b08c0
   m_configObjects: {}
