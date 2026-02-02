@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class PartyController : MonoBehaviour
 {
-    static public int day = 0;
     public enum Species
     {
         Vampire,
@@ -17,7 +16,6 @@ public class PartyController : MonoBehaviour
         Fae,
         Siren
     };
-    bool b = false;
 
     [SerializeField] GameObject npc;
     int[] numOfNPCs = { 20, 28, 35 };
@@ -26,30 +24,28 @@ public class PartyController : MonoBehaviour
     [Tooltip("vamp, were, fae, siren")]
     int[] attendeeDistribution = { 10, 20, 30, 40 };//should always add up to 1
     String[] speciesNames = { "Vampire", "Werewolf", "Fae", "Siren" };
-    List<Vector2Int>guestLocations = new List<Vector2Int>();
+    List<Vector2Int> guestLocations = new List<Vector2Int>();
     Vector3 empty = new Vector3(-1, -1, -1);
 
     [SerializeField] public static int partyType;
     //stairs vs balcony height when sprites are in
 
-    
     [SerializeField] float posXBound = 9.5f, negXBound = -9.0f;
-    float[] yLevels = { 4.2f, -2f, -4.5f, -7f};
+    float[] yLevels = { 4.2f, -2f, -4.5f, -7f };
     //
-    float[] zLevels = { 1, -4, -5, -6, -7};
+    float[] zLevels = { 1, -4, -5, -6, -7 };
     Vector3[,] possiblePositions = new Vector3[4, 9];//2d array
     int[] spotsPerY = new int[4];
     int totalSpots = -1;
     public static List<GameObject> guestObjects = new List<GameObject>();
 
-    String[] sceneNames = {"Carmilla VN", "Nosferatu VN", "Dracula VN" };
+    String[] sceneNames = { "Carmilla VN", "Nosferatu VN", "Dracula VN", "Lycaon VN", "Claudine VN", "Fenrir VN", "Aoibheall VN", "Oberon VN", "Titania VN", "Pisinoe VN", "Lorelei VN", "Calypso VN"};
     //TODO: dump all arrays of game objects when switching scenes
     
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
         InitializePossibleGuestLocations();
         RandomizeGuests();
         OrganizeSpecies();
@@ -73,7 +69,7 @@ public class PartyController : MonoBehaviour
         float xDist = posXBound - negXBound;
         Debug.Log(xDist);
         
-        switch (day)
+        switch (Day.day)
         {
             case 0://7753
                 spotsPerY[0] = 7;
@@ -135,12 +131,12 @@ public class PartyController : MonoBehaviour
 
         //for now, random
         partyType = _speciesLeft[0];
-        int _guestsRemaining = numOfNPCs[day];
+        int _guestsRemaining = numOfNPCs[Day.day];
 
         //for eaach species but not always in the same order
 
         //pick from the species and then assign an amount of attendees
-        int _firstSpecies = UnityEngine.Random.Range((int)(0.5 * numOfNPCs[day]), (int)(0.7 * numOfNPCs[day]));
+        int _firstSpecies = UnityEngine.Random.Range((int)(0.5 * numOfNPCs[Day.day]), (int)(0.7 * numOfNPCs[Day.day]));
         attendeeDistribution[partyType] = _firstSpecies;
         _guestsRemaining -= _firstSpecies;
         //Debug.Log(DebugRandom(_firstSpecies, partyType, _guestsRemaining));
@@ -157,7 +153,7 @@ public class PartyController : MonoBehaviour
             }
             else
             {
-                _currSpeciesPercent = UnityEngine.Random.Range((int)(0.1 * numOfNPCs[day]), (int)(_guestsRemaining * 0.75));
+                _currSpeciesPercent = UnityEngine.Random.Range((int)(0.1 * numOfNPCs[Day.day]), (int)(_guestsRemaining * 0.75));
               
             }
             _guestsRemaining -= _currSpeciesPercent;
@@ -211,7 +207,7 @@ public class PartyController : MonoBehaviour
 
         UnityEngine.Random.InitState(System.DateTime.Now.Second + (int)System.DateTime.Now.Ticks);
         List<int> spotsTaken = new List<int>();
-        while(numOfGroupsLeft > 0)//per each day
+        while(numOfGroupsLeft > 0)//per each Day.Day.day
         {
             int spot_to_check = UnityEngine.Random.Range(0, totalSpots);
             //draw number
@@ -407,20 +403,12 @@ public class PartyController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            
-        }
 
         if(partyEnergy >= 70)
         {
-            day++;
-            SceneManager.LoadScene("Carmila VN");
+            Day.day++;
+            SceneManager.LoadScene(sceneNames[((partyType * 3) + (Day.day))]);
+
         }
     }
 }
