@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   species: 0
-  groupNum: -1
+  groupNum: 0
   allSprites:
   - {fileID: 21300000, guid: ce5553d8a46021c49a202a0ea10b15e2, type: 3}
   - {fileID: 21300000, guid: 4423aec6eb2c4504f9acd051c52792cd, type: 3}
