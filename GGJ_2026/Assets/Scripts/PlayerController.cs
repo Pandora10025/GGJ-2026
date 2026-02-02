@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public static float balconyLevel = 4.3f;
     [SerializeField] public static float scaleLevel = 0.125f;
     [SerializeField] private float[] stairUpperBounds = new float[4];
-    private bool b = false;
-    bool onStairs = false;
+    //private bool b = false;
+    //bool onStairs = false;
     
     // Start is called before the first frame update
     void Start()

@@ -24,22 +24,22 @@ public class PartyController : MonoBehaviour
     [Tooltip("vamp, were, fae, siren")]
     int[] attendeeDistribution = { 10, 20, 30, 40 };//should always add up to 1
     String[] speciesNames = { "Vampire", "Werewolf", "Fae", "Siren" };
-    List<Vector2Int>guestLocations = new List<Vector2Int>();
+    List<Vector2Int> guestLocations = new List<Vector2Int>();
     Vector3 empty = new Vector3(-1, -1, -1);
 
     [SerializeField] public static int partyType;
     //stairs vs balcony height when sprites are in
-    
+
     [SerializeField] float posXBound = 9.5f, negXBound = -9.0f;
-    float[] yLevels = { 4.2f, -2f, -4.5f, -7f};
+    float[] yLevels = { 4.2f, -2f, -4.5f, -7f };
     //
-    float[] zLevels = { 1, -4, -5, -6, -7};
+    float[] zLevels = { 1, -4, -5, -6, -7 };
     Vector3[,] possiblePositions = new Vector3[4, 9];//2d array
     int[] spotsPerY = new int[4];
     int totalSpots = -1;
     public static List<GameObject> guestObjects = new List<GameObject>();
 
-    String[] sceneNames = {"Carmilla VN", "Nosferatu VN", "Dracula VN" };
+    String[] sceneNames = { "Carmilla VN", "Nosferatu VN", "Dracula VN", "Lycaon VN", "Claudine VN", "Fenrir VN", "Aoibheall VN", "Oberon VN", "Titania VN", "Pisinoe VN", "Lorelei VN", "Calypso VN"};
     //TODO: dump all arrays of game objects when switching scenes
     
 
@@ -407,7 +407,8 @@ public class PartyController : MonoBehaviour
         if(partyEnergy >= 70)
         {
             Day.day++;
-            SceneManager.LoadScene("Carmilla VN");
+            SceneManager.LoadScene(sceneNames[((partyType * 3) + (Day.day))]);
+
         }
     }
 }
