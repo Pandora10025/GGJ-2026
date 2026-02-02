@@ -445,11 +445,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 0, y: -1}
+  scrollPos: {x: 9.708456, y: 12.424968}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 1
+  zoom: 0.9294999
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -1596,8 +1596,8 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 8
-    y: 343
-    width: 77
+    y: 341.92416
+    width: 76.89618
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1624,7 +1624,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 9
     y: 278
-    width: 71
+    width: 70.97902
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1980,24 +1980,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 674344629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Script: {fileID: 11500000, guid: 00d03ae0919f04264b018681ed534177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 55
+  itemId: 57
   indentLevel: 0
-  storyText: You lose!
-  description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 0}
+  _sceneName:
+    stringRef: {fileID: 0}
+    stringVal: Lose
+  loadingImage: {fileID: 0}
+  sceneNameOLD: 
 --- !u!114 &674344688
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2007,24 +1999,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 674344629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Script: {fileID: 11500000, guid: 00d03ae0919f04264b018681ed534177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 54
+  itemId: 56
   indentLevel: 0
-  storyText: You win!
-  description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 0}
+  _sceneName:
+    stringRef: {fileID: 0}
+    stringVal: Win
+  loadingImage: {fileID: 0}
+  sceneNameOLD: 
 --- !u!1 &712703431
 GameObject:
   m_ObjectHideFlags: 0
