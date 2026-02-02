@@ -59,5 +59,15 @@ MonoBehaviour:
   - id: feather_5
     sprite: {fileID: 21300000, guid: af69ed033fbdcc540b7da2b76d55039d, type: 3}
   furs: []
-  accessories: []
+  accessories:
+  - id: charm_1
+    sprite: {fileID: 21300000, guid: 156317db241332c4ca0669d2afad47af, type: 3}
+  - id: charm_2
+    sprite: {fileID: 21300000, guid: a260cc76044facf44b72057b6216f8a3, type: 3}
+  - id: charm_3
+    sprite: {fileID: 21300000, guid: 9fd7fa1c0a3c6df4582ba2560b6c3765, type: 3}
+  - id: charm_4
+    sprite: {fileID: 21300000, guid: cf9d8cbd6e905b746933af3620a92bef, type: 3}
+  - id: charm_5
+    sprite: {fileID: 21300000, guid: 0a5170dcd02970a4780ae8d839568a2d, type: 3}
   flowers: []

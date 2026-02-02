@@ -52,7 +52,7 @@ public class CategoryUIController : MonoBehaviour
     /// </summary>
     public void ShowCategory(MaskCategory category)
     {
-        // Debug.Log("Switching category to: " + category); // Uncomment if helpful
+        //Debug.Log("Switching category to: " + category); // Uncomment if helpful
 
         for (int i = 0; i < categoryPanels.Length; i++)
         {

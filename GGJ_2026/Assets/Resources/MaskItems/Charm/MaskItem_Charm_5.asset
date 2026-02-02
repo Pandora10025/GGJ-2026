@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0945853ea41222e47ac5ec8738716866, type: 3}
+  m_Name: MaskItem_Charm_5
+  m_EditorClassIdentifier: 
+  itemId: charm_5
+  category: 5
+  icon: {fileID: 21300000, guid: 0a5170dcd02970a4780ae8d839568a2d, type: 3}
+  prefab2D: {fileID: 8265482878491346505, guid: 0c3cf38f29dfda34babeb106a755e58a, type: 3}
+  refinement: 0
+  era: 0
+  ornamentation: 0
+  presence: 0
