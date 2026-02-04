@@ -510,7 +510,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3ca17e540a5c520449d8fe209939814e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -796,7 +796,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a3108c6e0b2706f4ea00b62542f1f02d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1542,7 +1542,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: fca8a09da004ead41917acec285a9513, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1609,6 +1609,63 @@ Transform:
   - {fileID: 914435784}
   m_Father: {fileID: 1264671744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1900296748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.676004
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0919864
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.71129894
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540591280980922129, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8351875814448666842, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
+      propertyPath: m_Name
+      value: PostProcessingGlobalVolume
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b555de6dd17e9b46882623f5712e638, type: 3}
 --- !u!1 &2106833606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1703,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.13983104, g: 0.15931813, b: 0.16981119, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1725,7 +1782,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1808,6 +1865,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2106833609}
+  - {fileID: 1900296748}
   - {fileID: 1165658589}
   - {fileID: 6715219075683754466}
   - {fileID: 1264671744}

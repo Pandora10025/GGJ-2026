@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MaskItem_Feather_4
   m_EditorClassIdentifier: 
   itemId: feather_4
-  category: 0
+  category: 1
   icon: {fileID: 21300000, guid: e2cbb1b4cef17264a909af780453a11b, type: 3}
   prefab2D: {fileID: 4526631356906910416, guid: c33be3f5402dc624aaf191ece8437c7c, type: 3}
   refinement: 0

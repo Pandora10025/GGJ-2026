@@ -46,7 +46,17 @@ MonoBehaviour:
   - id: anime_trim_2
     sprite: {fileID: 21300000, guid: 1bb4f06057f268c47a9aa6ae2f5271fd, type: 3}
   gilded: []
-  lace: []
+  lace:
+  - id: lace_1
+    sprite: {fileID: 21300000, guid: 7724af7da4485ff4cba73aad2300e4bf, type: 3}
+  - id: lace_2
+    sprite: {fileID: 21300000, guid: f759a71c1b62a184785bd8672951c0ae, type: 3}
+  - id: lace_3
+    sprite: {fileID: 21300000, guid: 75f79f69b5a7e794880f9fc68329a9d3, type: 3}
+  - id: lace_4
+    sprite: {fileID: 21300000, guid: 028c11ba15aff6e49b922a4dbf159454, type: 3}
+  - id: lace_5
+    sprite: {fileID: 21300000, guid: a38d85fe41d924641ab6fb0b089b9bbb, type: 3}
   feathers:
   - id: feather_1
     sprite: {fileID: 21300000, guid: 95300e366c44e774698b18307d02834b, type: 3}
@@ -58,7 +68,17 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e2cbb1b4cef17264a909af780453a11b, type: 3}
   - id: feather_5
     sprite: {fileID: 21300000, guid: af69ed033fbdcc540b7da2b76d55039d, type: 3}
-  furs: []
+  furs:
+  - id: fur_1
+    sprite: {fileID: 21300000, guid: 1f3458ebbd9fdb0458463cb06e450028, type: 3}
+  - id: fur_2
+    sprite: {fileID: 21300000, guid: 17b52565d66eb5944856c421ed0d86d6, type: 3}
+  - id: fur_3
+    sprite: {fileID: 21300000, guid: 15e7a79b8fc23f64aa10ebe6bbd88d1d, type: 3}
+  - id: fur_4
+    sprite: {fileID: 21300000, guid: 56ab138360677ad46be82ac028e5576e, type: 3}
+  - id: fur_5
+    sprite: {fileID: 21300000, guid: 0b333f858fd142341b70db94f5722ec5, type: 3}
   accessories:
   - id: charm_1
     sprite: {fileID: 21300000, guid: 156317db241332c4ca0669d2afad47af, type: 3}
@@ -70,4 +90,14 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: cf9d8cbd6e905b746933af3620a92bef, type: 3}
   - id: charm_5
     sprite: {fileID: 21300000, guid: 0a5170dcd02970a4780ae8d839568a2d, type: 3}
-  flowers: []
+  flowers:
+  - id: flower_1
+    sprite: {fileID: 21300000, guid: 413d23322c6357c4a9600309dd948c8d, type: 3}
+  - id: flower_2
+    sprite: {fileID: 21300000, guid: 2fda8fdd732280d448c254b1bd204e78, type: 3}
+  - id: flower_3
+    sprite: {fileID: 21300000, guid: 441151b890429b145af379507989e102, type: 3}
+  - id: flower_4
+    sprite: {fileID: 21300000, guid: c40844e0a2872d14fa18b7a4e3b0d36c, type: 3}
+  - id: flower_5
+    sprite: {fileID: 21300000, guid: 97b19ec577d188443b8679e383ba24dc, type: 3}

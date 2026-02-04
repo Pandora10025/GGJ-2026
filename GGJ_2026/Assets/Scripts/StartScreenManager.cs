@@ -19,6 +19,6 @@ public class StartScreenManager : MonoBehaviour
 
     public void LoadScene()
     {
-        SceneManager.LoadScene("Ball Scene");
+        SceneManager.LoadScene("Intro");
     }
 }
