@@ -36,14 +36,14 @@ public class DraggableItemTile : MonoBehaviour, IBeginDragHandler, IDragHandler,
         // Create a ghost icon that follows the mouse
         dragGhost = new GameObject("DragGhost");
         dragGhost.transform.SetParent(rootCanvas.transform, false);
-        //if feather then 5f otherwise 4f
+        //if feather then big otherwise only slightly big
         if (Regex.IsMatch(boundItem.itemId, "feather"))
         {
-            Debug.Log("5f");
-            dragGhost.transform.localScale = 5f * Vector3.one;
+            dragGhost.transform.localScale = 4f * Vector3.one;
         }
-        else {
-            dragGhost.transform.localScale = 3.5f * Vector3.one;
+        else
+        {
+            dragGhost.transform.localScale = 3f * Vector3.one;
         }
 
         dragGhostRT = dragGhost.AddComponent<RectTransform>();

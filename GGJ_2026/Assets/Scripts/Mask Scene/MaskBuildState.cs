@@ -49,7 +49,7 @@ public class MaskBuildState : MonoBehaviour
         for (int i = placed.Count - 1; i >= 0; i--)
         {
             if (placed[i] != null) Destroy(placed[i].gameObject);
-        }
+        }              
         placed.Clear();
     }
 
