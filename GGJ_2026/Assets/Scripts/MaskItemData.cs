@@ -14,8 +14,9 @@ public class MaskItemData : ScriptableObject
     public GameObject prefab2D;      // should include SpriteRenderer/UI, etc.
 
     [Header("Repo modifiers (optional for now)")]
-    public int refinement;
-    public int era;
-    public int ornamentation;
-    public int presence;
+
+    [Range(-2, 2)] public int refinement;
+    [Range(-2, 2)] public int era;
+    [Range(-2, 2)] public int ornamentation;
+    [Range(-2, 2)] public int presence;
 }

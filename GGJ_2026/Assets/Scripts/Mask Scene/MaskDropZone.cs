@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -32,8 +33,9 @@ public class MaskDropZone : MonoBehaviour, IDropHandler
 
         // Spawn under attachment root at local position
         var go = Object.Instantiate(itemData.prefab2D, shape.AttachmentRoot);
-        go.transform.position = world;
+        go.transform.position = new Vector3(world.x, world.y, -1);//needs manual depth thing
         go.transform.localScale = Vector3.one;
+        Debug.Log(go.name);
 
         // Ensure it has PlacedItemInstance and gets registered
         var inst = go.GetComponent<PlacedItemInstance>();

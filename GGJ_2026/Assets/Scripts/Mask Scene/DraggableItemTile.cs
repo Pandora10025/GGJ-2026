@@ -1,6 +1,10 @@
+using Fungus;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Windows;
+using System.Text.RegularExpressions;
 
 public class DraggableItemTile : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -32,6 +36,15 @@ public class DraggableItemTile : MonoBehaviour, IBeginDragHandler, IDragHandler,
         // Create a ghost icon that follows the mouse
         dragGhost = new GameObject("DragGhost");
         dragGhost.transform.SetParent(rootCanvas.transform, false);
+        //if feather then 5f otherwise 4f
+        if (Regex.IsMatch(boundItem.itemId, "feather"))
+        {
+            Debug.Log("5f");
+            dragGhost.transform.localScale = 5f * Vector3.one;
+        }
+        else {
+            dragGhost.transform.localScale = 3.5f * Vector3.one;
+        }
 
         dragGhostRT = dragGhost.AddComponent<RectTransform>();
         dragGhostRT.sizeDelta = rectTransform.sizeDelta;
